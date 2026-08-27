@@ -143,7 +143,7 @@
     </div></section>
 
     <section class="report-section" id="spSection" hidden><h2>🛒 СП</h2><div class="grid">
-      <div><label for="spAccepted">Принято</label><input id="spAccepted" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="spAccepted">Принято заказов от курьера</label><input id="spAccepted" type="number" min="0" step="1" inputmode="numeric" required></div>
       <div><label for="spIssued">Выдано заказов клиенту</label><input id="spIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
     </div></section>
 
@@ -198,7 +198,7 @@
     </div></section>
 
     <section class="report-section mesch-section" id="meschSpSection" hidden><h2>🛒 СП</h2><div class="grid">
-      <div><label for="meschSpLegacyAccepted">Принято</label><input id="meschSpLegacyAccepted" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="meschSpLegacyAccepted">Принято заказов от курьера</label><input id="meschSpLegacyAccepted" type="number" min="0" step="1" inputmode="numeric" required></div>
       <div><label for="meschSpIssued">Выдано заказов клиенту</label><input id="meschSpIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
     </div></section>
 
@@ -291,7 +291,7 @@
 Остаток дропов на складе — ${val('meschDropsRemain')}
 
 🛒 СП
-Принято — ${val('meschSpLegacyAccepted')}
+Принято заказов от курьера — ${val('meschSpLegacyAccepted')}
 Выдано заказов клиенту — ${val('meschSpIssued')}
 
 📦 DHL
@@ -328,7 +328,7 @@ ${line('Отгружено', 'dhlShipped', 'dhlShippedCount')}
 Отгружены - ${radio('norilskOzonReturns')}
 
 🛒СП
-Принято - ${val('spAccepted')}
+Принято заказов от курьера - ${val('spAccepted')}
 Выдано заказов клиенту - ${val('spIssued')}
 
 📦 DHL
@@ -352,7 +352,7 @@ ${line('Отгружено', 'norilskDhlShipped', 'norilskDhlShippedCount')}
 Остаток дропов на складе - ${val('dropsRemain')}
 
 🛒СП
-Принято - ${val('spAccepted')}
+Принято заказов от курьера - ${val('spAccepted')}
 Выдано заказов клиенту - ${val('spIssued')}
 
 🟢 Авито
