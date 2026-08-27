@@ -83,6 +83,15 @@
     #result { min-height:390px; resize:vertical; font-family:Arial,sans-serif; }
     .status { min-height:22px; margin:6px 0 0; text-align:center; font-weight:700; color:#08743f; }
     .error { color:var(--red); }
+    #reportForm.norilsk-order #generalSection { order:0; }
+    #reportForm.norilsk-order #ymSection { order:1; }
+    #reportForm.norilsk-order #avitoSection { order:2; }
+    #reportForm.norilsk-order #norilskOzonSection { order:3; }
+    #reportForm.norilsk-order #spSection { order:4; }
+    #reportForm.norilsk-order #norilskDhlSection { order:5; }
+    #reportForm.norilsk-order #cashSection { order:6; }
+    #reportForm.norilsk-order #resultBox { order:7; }
+    #reportForm.norilsk-order .actions { order:8; }
     @media (max-width:560px) {
       .grid { grid-template-columns:1fr; }
       .wide { grid-column:auto; }
@@ -94,7 +103,7 @@
 <main>
   <header><h1>Ежедневный отчёт ПВЗ</h1><p>Выберите адрес и заполняйте разделы сверху вниз</p></header>
   <form id="reportForm">
-    <section><div class="grid">
+    <section id="generalSection"><div class="grid">
       <div><label for="date">Дата отчёта</label><input id="date" type="date" required></div>
       <div><label for="address">Адрес ПВЗ</label><select id="address" required>
         <option value="" selected disabled>Выберите адрес</option>
@@ -248,6 +257,7 @@
   }
   function setVisibleSections() {
     const selected = address.value;
+    form.classList.toggle('norilsk-order', selected === 'Норильская 16');
     const visible = !selected ? [] : (isMeschersky() ? meschSectionIds : (selected === 'Норильская 16' ? norilskSectionIds : standardSectionIds));
     sectionIds.forEach(id => {
       const section = document.getElementById(id);
@@ -290,17 +300,44 @@ ${line('Отгружено', 'dhlShipped', 'dhlShippedCount')}
 
 💰Наличные в ПВЗ — ${cashRu(val('meschCash'))} ₽`;
     }
-    const cashLine = `\n\n💰Наличные в ПВЗ - ${cashRu(val('cash'))} ₽`;
-    const norilskDhlLine = address.value === 'Норильская 16' ? `\n\n📦 DHL
-${line('Принято', 'norilskDhlAccepted', 'norilskDhlAcceptedCount')}
-${line('Отгружено', 'norilskDhlShipped', 'norilskDhlShippedCount')}` : '';
-    const norilskOzonLine = address.value === 'Норильская 16' ? `\n\n🩷 ОЗОН
+    if (address.value === 'Норильская 16') {
+      return `${dateRu(val('date'))} 📋 ${val('address')}
+
+🗃️Была поставка ЯМ - ${radio('ymSupply')}
+Выдано - ${val('ymIssued')}
+Остаток - ${val('ymRemain')}
+
+📝Возвраты
+Отгружены - ${radio('returns')}
+
+📦Дропы
+Отгружено - ${radio('drops')}
+Остаток - ${val('dropsRemain')}
+
+🟢 Авито
+Принято от курьера - ${val('avitoCourierIn')}
+Отгружено курьеру - ${radio('avitoOut')}
+Принято от продавцов - ${val('avitoSellers')}
+
+🩷 ОЗОН
 Была поставка ОЗОН - ${radio('norilskOzonSupply')}
 Выдано - ${val('norilskOzonIssued')}
 Остаток - ${val('norilskOzonRemain')}
 
 📝Возвраты
-Отгружены - ${radio('norilskOzonReturns')}` : '';
+Отгружены - ${radio('norilskOzonReturns')}
+
+🛒СП
+Принято - ${val('spAccepted')}
+Выдано - ${val('spIssued')}
+
+📦 DHL
+${line('Принято', 'norilskDhlAccepted', 'norilskDhlAcceptedCount')}
+${line('Отгружено', 'norilskDhlShipped', 'norilskDhlShippedCount')}
+
+💰Наличные в ПВЗ - ${cashRu(val('cash'))} ₽`;
+    }
+    const cashLine = `\n\n💰Наличные в ПВЗ - ${cashRu(val('cash'))} ₽`;
     return `${dateRu(val('date'))} 📋 ${val('address')}
 
 🗃️Была поставка ЯМ - ${radio('ymSupply')}
@@ -321,7 +358,7 @@ ${line('Отгружено', 'norilskDhlShipped', 'norilskDhlShippedCount')}` : 
 🟢 Авито
 Принято от курьера - ${val('avitoCourierIn')}
 Отгружено курьеру - ${radio('avitoOut')}
-Принято от продавцов - ${val('avitoSellers')}${cashLine}${norilskDhlLine}${norilskOzonLine}`;
+Принято от продавцов - ${val('avitoSellers')}${cashLine}`;
   }
   form.addEventListener('submit', event => {
     event.preventDefault(); status.textContent=''; status.classList.remove('error');
