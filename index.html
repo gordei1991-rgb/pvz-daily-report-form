@@ -374,8 +374,12 @@ ${line('Отгружен заказ курьеру', 'norilskDhlShipped', 'noril
   });
   document.getElementById('vkBtn').addEventListener('click', event => {
     if (!result.value) { event.preventDefault(); status.textContent='Сначала сформируйте отчёт.'; status.classList.add('error'); return; }
+    event.preventDefault();
     result.select(); document.execCommand('copy');
     status.classList.remove('error'); status.textContent='Отчёт скопирован. Открываем беседу VK…';
+    const invitePath = 'vk.me/join/R0LcEuprFcAtKXsTmMX1Z1K/b4AQWNjvBOQ=';
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    window.location.assign(isIOS ? `x-safari-https://${invitePath}` : `https://${invitePath}`);
   });
   form.addEventListener('reset', () => {
     setTimeout(() => { document.getElementById('date').valueAsDate=new Date(); setVisibleSections(); },0);
