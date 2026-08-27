@@ -79,6 +79,7 @@
     .primary { background:var(--blue); color:#fff; }
     .copy { background:var(--navy); color:#fff; }
     .vk { background:#2787f5; color:#fff; }
+    .vk-fallback { grid-column:1/-1; background:#dcecff; color:#075b84; }
     .reset { background:#e5ebee; color:var(--navy); }
     #resultBox { display:none; border:2px solid var(--blue); }
     #result { min-height:390px; resize:vertical; font-family:Arial,sans-serif; }
@@ -224,7 +225,8 @@
     <div class="actions">
       <button class="primary" type="submit">Сформировать отчёт</button>
       <button class="copy" type="button" id="copyBtn">Скопировать</button>
-      <a class="vk action-link" id="vkBtn" href="https://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=" target="_self">Скопировать и открыть группу VK</a>
+      <a class="vk action-link" id="vkBtn" href="vk://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=">Скопировать и открыть беседу в приложении VK</a>
+      <a class="vk-fallback action-link" href="https://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=" target="_blank" rel="noopener">Если VK не открылся — открыть обычную ссылку</a>
       <button class="reset" type="reset">Очистить</button>
     </div>
   </form>
