@@ -224,7 +224,7 @@
     <div class="actions">
       <button class="primary" type="submit">Сформировать отчёт</button>
       <button class="copy" type="button" id="copyBtn">Скопировать</button>
-      <button class="vk" type="button" id="vkBtn">Скопировать и открыть беседу VK</button>
+      <a class="vk action-link" id="vkBtn" href="https://vk.me/join/R0LcEuprFcAtKXsTmMX1Z1K/b4AQWNjvBOQ=" target="_self">Скопировать и открыть беседу VK</a>
       <button class="reset" type="reset">Очистить</button>
     </div>
   </form>
@@ -376,13 +376,6 @@ ${line('Отгружен заказ курьеру', 'norilskDhlShipped', 'noril
     if (!result.value) { event.preventDefault(); status.textContent='Сначала сформируйте отчёт.'; status.classList.add('error'); return; }
     result.select(); document.execCommand('copy');
     status.classList.remove('error'); status.textContent='Отчёт скопирован. Открываем беседу VK…';
-    const fallback = setTimeout(() => {
-      if (!document.hidden) window.location.assign('https://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=');
-    }, 1200);
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) clearTimeout(fallback);
-    }, {once:true});
-    window.location.assign('vk://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=');
   });
   form.addEventListener('reset', () => {
     setTimeout(() => { document.getElementById('date').valueAsDate=new Date(); setVisibleSections(); },0);
