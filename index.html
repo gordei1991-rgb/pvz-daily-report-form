@@ -23,6 +23,8 @@
       display:block; width:100%; max-width:100%; min-width:0; min-height:52px; padding:11px 13px; border:2px solid var(--line); border-radius:10px;
       background:#fff; color:var(--navy); font:inherit;
     }
+    input[type="date"] { -webkit-appearance:none; appearance:none; inline-size:100%; min-inline-size:0; }
+    input[type="date"]::-webkit-date-and-time-value { min-width:0; }
     input:focus, select:focus, textarea:focus { outline:3px solid #0e7aae25; border-color:var(--blue); }
     fieldset { margin:0; padding:0; border:0; }
     .choices { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
