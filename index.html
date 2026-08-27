@@ -74,7 +74,8 @@
     .conditional-count[hidden] { display:none; }
     .conditional-count { grid-column:1/-1; padding:12px; border-radius:10px; background:#ffffffa8; }
     .actions { position:sticky; bottom:0; display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:10px 0; background:linear-gradient(transparent,var(--bg) 25%); }
-    button { min-height:48px; border:0; border-radius:11px; padding:10px; font:700 15px Arial,sans-serif; cursor:pointer; }
+    button, .action-link { min-height:48px; border:0; border-radius:11px; padding:10px; font:700 15px Arial,sans-serif; cursor:pointer; }
+    .action-link { display:grid; place-items:center; text-align:center; text-decoration:none; }
     .primary { background:var(--blue); color:#fff; }
     .copy { background:var(--navy); color:#fff; }
     .vk { background:#2787f5; color:#fff; }
@@ -223,7 +224,7 @@
     <div class="actions">
       <button class="primary" type="submit">Сформировать отчёт</button>
       <button class="copy" type="button" id="copyBtn">Скопировать</button>
-      <button class="vk" type="button" id="vkBtn">Скопировать и открыть группу VK</button>
+      <a class="vk action-link" id="vkBtn" href="https://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=" target="_self">Скопировать и открыть группу VK</a>
       <button class="reset" type="reset">Очистить</button>
     </div>
   </form>
@@ -371,11 +372,10 @@ ${line('Отгружен заказ курьеру', 'norilskDhlShipped', 'noril
     catch { result.select(); document.execCommand('copy'); }
     status.classList.remove('error'); status.textContent='Отчёт скопирован!';
   });
-  document.getElementById('vkBtn').addEventListener('click', () => {
-    if (!result.value) { status.textContent='Сначала сформируйте отчёт.'; status.classList.add('error'); return; }
+  document.getElementById('vkBtn').addEventListener('click', event => {
+    if (!result.value) { event.preventDefault(); status.textContent='Сначала сформируйте отчёт.'; status.classList.add('error'); return; }
     result.select(); document.execCommand('copy');
     status.classList.remove('error'); status.textContent='Отчёт скопирован. Открываем беседу VK…';
-    window.location.assign('https://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=');
   });
   form.addEventListener('reset', () => {
     setTimeout(() => { document.getElementById('date').valueAsDate=new Date(); setVisibleSections(); },0);
