@@ -134,6 +134,24 @@
     </section>
 
     <section class="report-section mesch-section" id="meschYmSection" hidden><h2 class="section-title">🟡 Яндекс Маркет</h2><div class="grid">
+      <fieldset class="wide"><legend>Была поставка ЯМ?</legend><div class="choices">
+        <label class="choice"><input type="radio" name="meschYmSupply" value="да" required><span>Да</span></label>
+        <label class="choice"><input type="radio" name="meschYmSupply" value="нет"><span>Нет</span></label>
+      </div></fieldset>
+      <div><label for="meschYmIssued">Выдано</label><input id="meschYmIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="meschYmRemain">Остаток</label><input id="meschYmRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div class="wide subblock"><h3>📝 Возвраты</h3><fieldset><legend>Возвраты отгружены?</legend><div class="choices">
+        <label class="choice"><input type="radio" name="meschReturns" value="да" required><span>Да</span></label>
+        <label class="choice"><input type="radio" name="meschReturns" value="нет"><span>Нет</span></label>
+      </div></fieldset></div>
+      <div class="wide subblock"><h3>📦 Дропы</h3><div class="grid">
+        <fieldset class="wide"><legend>Дропы отгружены?</legend><div class="choices">
+          <label class="choice"><input type="radio" name="meschDrops" value="да" required><span>Да</span></label>
+          <label class="choice"><input type="radio" name="meschDrops" value="нет"><span>Нет</span></label>
+        </div></fieldset>
+        <div class="wide"><label for="meschDropsRemain">Остаток</label><input id="meschDropsRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+      </div></div>
+      <div class="wide subblock"><h3>Приёмка и отгрузка</h3></div>
       <fieldset class="wide"><legend>Принято?</legend><div class="choices">
         <label class="choice"><input type="radio" name="meschYmAccepted" value="да" required><span>Да</span></label>
         <label class="choice"><input type="radio" name="meschYmAccepted" value="нет"><span>Нет</span></label>
@@ -147,6 +165,9 @@
     </div></section>
 
     <section class="report-section mesch-section" id="meschSpSection" hidden><h2>🛒 СП</h2><div class="grid">
+      <div><label for="meschSpLegacyAccepted">Принято</label><input id="meschSpLegacyAccepted" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="meschSpIssued">Выдано</label><input id="meschSpIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div class="wide subblock"><h3>Приёмка и отгрузка</h3></div>
       <fieldset class="wide"><legend>Принято?</legend><div class="choices">
         <label class="choice"><input type="radio" name="meschSpAccepted" value="да" required><span>Да</span></label>
         <label class="choice"><input type="radio" name="meschSpAccepted" value="нет"><span>Нет</span></label>
@@ -229,10 +250,24 @@
       return `${dateRu(val('date'))} 📋 ${val('address')}
 
 🟡 Яндекс Маркет
+Была поставка ЯМ — ${radio('meschYmSupply')}
+Выдано — ${val('meschYmIssued')}
+Остаток — ${val('meschYmRemain')}
+
+📝 Возвраты
+Отгружены — ${radio('meschReturns')}
+
+📦 Дропы
+Отгружено — ${radio('meschDrops')}
+Остаток — ${val('meschDropsRemain')}
+
 ${line('Принято', 'meschYmAccepted', 'meschYmAcceptedCount')}
 ${line('Отгружено', 'meschYmShipped', 'meschYmShippedCount')}
 
 🛒 СП
+Принято — ${val('meschSpLegacyAccepted')}
+Выдано — ${val('meschSpIssued')}
+
 ${line('Принято', 'meschSpAccepted', 'meschSpAcceptedCount')}
 ${line('Отгружено', 'meschSpShipped', 'meschSpShippedCount')}
 
