@@ -224,7 +224,7 @@
     <div class="actions">
       <button class="primary" type="submit">Сформировать отчёт</button>
       <button class="copy" type="button" id="copyBtn">Скопировать</button>
-      <a class="vk action-link" id="vkBtn" href="https://vk.me/join/R0LcEuprFcAtKXsTmMX1Z1K/b4AQWNjvBOQ=" target="_self">Скопировать и открыть беседу VK</a>
+      <a class="vk action-link" id="vkBtn" href="https://vk.ru/im/convo/2000000182?entrypoint=list_all" target="_self">Скопировать и открыть беседу VK</a>
       <button class="reset" type="reset">Очистить</button>
     </div>
   </form>
@@ -377,9 +377,9 @@ ${line('Отгружен заказ курьеру', 'norilskDhlShipped', 'noril
     event.preventDefault();
     result.select(); document.execCommand('copy');
     status.classList.remove('error'); status.textContent='Отчёт скопирован. Открываем беседу VK…';
-    const invitePath = 'vk.me/join/R0LcEuprFcAtKXsTmMX1Z1K/b4AQWNjvBOQ=';
+    const conversationPath = 'vk.ru/im/convo/2000000182?entrypoint=list_all';
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    window.location.assign(isIOS ? `x-safari-https://${invitePath}` : `https://${invitePath}`);
+    window.location.assign(isIOS ? `x-safari-https://${conversationPath}` : `https://${conversationPath}`);
   });
   form.addEventListener('reset', () => {
     setTimeout(() => { document.getElementById('date').valueAsDate=new Date(); setVisibleSections(); },0);
