@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ежедневный отчёт ПВЗ</title>
+  <style>
+    :root { --navy:#12304a; --blue:#0e7aae; --line:#d7e2e8; --bg:#f4f7f9; --red:#b3261e; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--navy); font:16px/1.35 Arial,sans-serif; }
+    main { width:min(760px,100%); margin:auto; padding:18px 12px 50px; }
+    header { text-align:center; padding:18px; background:var(--navy); color:#fff; border-radius:16px; }
+    h1 { margin:0 0 5px; font-size:clamp(24px,5vw,34px); }
+    header p { margin:0; color:#d9ebf3; }
+    form { margin-top:14px; display:grid; gap:12px; }
+    section { background:#fff; border:1px solid var(--line); border-radius:14px; padding:15px; box-shadow:0 2px 8px #12304a0d; }
+    h2 { margin:0 0 12px; font-size:20px; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .wide { grid-column:1/-1; }
+    label, legend { display:block; font-weight:700; margin-bottom:5px; }
+    input[type="text"], input[type="date"], input[type="number"], select, textarea {
+      width:100%; min-height:46px; padding:10px 12px; border:2px solid var(--line); border-radius:10px;
+      background:#fff; color:var(--navy); font:inherit;
+    }
+    input:focus, select:focus, textarea:focus { outline:3px solid #0e7aae25; border-color:var(--blue); }
+    fieldset { margin:0; padding:0; border:0; }
+    .choices { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .choice { position:relative; }
+    .choice input { position:absolute; opacity:0; }
+    .choice span { display:block; text-align:center; padding:10px; border:2px solid var(--line); border-radius:10px; font-weight:700; cursor:pointer; }
+    .choice input:checked + span { border-color:var(--blue); background:#eaf6fb; color:#075b84; }
+    .hint { margin:5px 0 0; color:#647783; font-size:13px; }
+    .actions { position:sticky; bottom:0; display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:10px 0; background:linear-gradient(transparent,var(--bg) 25%); }
+    button { min-height:48px; border:0; border-radius:11px; padding:10px; font:700 15px Arial,sans-serif; cursor:pointer; }
+    .primary { background:var(--blue); color:#fff; }
+    .copy { background:var(--navy); color:#fff; }
+    .vk { background:#2787f5; color:#fff; }
+    .reset { background:#e5ebee; color:var(--navy); }
+    #resultBox { display:none; border:2px solid var(--blue); }
+    #result { min-height:390px; resize:vertical; font-family:Arial,sans-serif; }
+    .status { min-height:22px; margin:6px 0 0; text-align:center; font-weight:700; color:#08743f; }
+    .error { color:var(--red); }
+    @media (max-width:560px) {
+      .grid { grid-template-columns:1fr; }
+      .wide { grid-column:auto; }
+      .actions { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header><h1>Ежедневный отчёт ПВЗ</h1><p>Заполните данные за текущую смену</p></header>
+  <form id="reportForm">
+    <section><div class="grid">
+      <div><label for="date">Дата отчёта</label><input id="date" type="date" required></div>
+      <div><label for="address">Адрес ПВЗ</label><select id="address" required>
+        <option value="" selected disabled>Выберите адрес</option>
+        <option value="Карла Маркса 18">Карла Маркса 18</option>
+        <option value="Мещерский бульвар 3 к 2">Мещерский бульвар 3 к 2</option>
+        <option value="Норильская 16">Норильская 16</option>
+      </select></div>
+    </div></section>
+
+    <section><h2>🗃️ Яндекс Маркет</h2><div class="grid">
+      <fieldset class="wide"><legend>Была поставка ЯМ?</legend><div class="choices">
+        <label class="choice"><input type="radio" name="ymSupply" value="да" required><span>Да</span></label>
+        <label class="choice"><input type="radio" name="ymSupply" value="нет"><span>Нет</span></label>
+      </div></fieldset>
+      <div><label for="ymIssued">Выдано</label><input id="ymIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="ymRemain">Остаток</label><input id="ymRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+    </div></section>
+
+    <section><h2>📝 Возвраты</h2><fieldset><legend>Возвраты отгружены?</legend><div class="choices">
+      <label class="choice"><input type="radio" name="returns" value="да" required><span>Да</span></label>
+      <label class="choice"><input type="radio" name="returns" value="нет"><span>Нет</span></label>
+    </div></fieldset></section>
+
+    <section><h2>📦 Дропы</h2><div class="grid">
+      <fieldset class="wide"><legend>Дропы отгружены?</legend><div class="choices">
+        <label class="choice"><input type="radio" name="drops" value="да" required><span>Да</span></label>
+        <label class="choice"><input type="radio" name="drops" value="нет"><span>Нет</span></label>
+      </div></fieldset>
+      <div class="wide"><label for="dropsRemain">Остаток</label><input id="dropsRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+    </div></section>
+
+    <section><h2>🛒 СП</h2><div class="grid">
+      <div><label for="spAccepted">Принято</label><input id="spAccepted" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="spIssued">Выдано</label><input id="spIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+    </div></section>
+
+    <section><h2>🟢 Avito</h2><div class="grid">
+      <div><label for="avitoCourierIn">Принято от курьера</label><input id="avitoCourierIn" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="avitoSellers">Принято от продавцов</label><input id="avitoSellers" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <fieldset class="wide"><legend>Отгружено курьеру?</legend><div class="choices">
+        <label class="choice"><input type="radio" name="avitoOut" value="да" required><span>Да</span></label>
+        <label class="choice"><input type="radio" name="avitoOut" value="нет"><span>Нет</span></label>
+      </div></fieldset>
+    </div></section>
+
+    <section><h2>💰 Наличные в ПВЗ</h2>
+      <label for="cash">Фактическая сумма, ₽</label><input id="cash" type="number" min="0" step="0.01" inputmode="decimal" required>
+    </section>
+
+    <section id="resultBox"><h2>Готовый отчёт</h2><textarea id="result" readonly></textarea><p id="status" class="status"></p></section>
+    <div class="actions">
+      <button class="primary" type="submit">Сформировать отчёт</button>
+      <button class="copy" type="button" id="copyBtn">Скопировать</button>
+      <button class="vk" type="button" id="vkBtn">Скопировать и открыть группу VK</button>
+      <button class="reset" type="reset">Очистить</button>
+    </div>
+  </form>
+</main>
+<script>
+  const form = document.getElementById('reportForm');
+  const resultBox = document.getElementById('resultBox');
+  const result = document.getElementById('result');
+  const status = document.getElementById('status');
+  document.getElementById('date').valueAsDate = new Date();
+  const val = id => document.getElementById(id).value.trim();
+  const radio = name => form.elements[name].value;
+  const dateRu = raw => { const [y,m,d] = raw.split('-'); return `${d}.${m}.${y.slice(-2)}`; };
+  const cashRu = raw => Number(raw).toLocaleString('ru-RU',{minimumFractionDigits:0,maximumFractionDigits:2});
+  function buildReport() {
+    return `${dateRu(val('date'))} 📋 ${val('address')}
+
+🗃️Была поставка ЯМ - ${radio('ymSupply')}
+Выдано - ${val('ymIssued')}
+Остаток - ${val('ymRemain')}
+
+📝Возвраты
+Отгружены - ${radio('returns')}
+
+📦Дропы
+Отгружено - ${radio('drops')}
+Остаток - ${val('dropsRemain')}
+
+🛒СП
+Принято - ${val('spAccepted')}
+Выдано - ${val('spIssued')}
+
+🟢 Авито
+Принято от курьера - ${val('avitoCourierIn')}
+Отгружено курьеру - ${radio('avitoOut')}
+Принято от продавцов - ${val('avitoSellers')}
+
+💰Наличные в ПВЗ - ${cashRu(val('cash'))} ₽`;
+  }
+  form.addEventListener('submit', event => {
+    event.preventDefault(); status.textContent=''; status.classList.remove('error');
+    if (!form.reportValidity()) return;
+    result.value = buildReport(); resultBox.style.display='block'; resultBox.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+  document.getElementById('copyBtn').addEventListener('click', async () => {
+    if (!result.value) { status.textContent='Сначала сформируйте отчёт.'; status.classList.add('error'); return; }
+    try { await navigator.clipboard.writeText(result.value); }
+    catch { result.select(); document.execCommand('copy'); }
+    status.classList.remove('error'); status.textContent='Отчёт скопирован!';
+  });
+  document.getElementById('vkBtn').addEventListener('click', () => {
+    if (!result.value) { status.textContent='Сначала сформируйте отчёт.'; status.classList.add('error'); return; }
+    result.select(); document.execCommand('copy');
+    window.open('https://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=', '_blank', 'noopener');
+    status.classList.remove('error'); status.textContent='Отчёт скопирован. Вставьте его в беседу VK и нажмите «Отправить».';
+  });
+  form.addEventListener('reset', () => {
+    setTimeout(() => { document.getElementById('date').valueAsDate=new Date(); result.value=''; resultBox.style.display='none'; status.textContent=''; },0);
+  });
+</script>
+</body>
+</html>
+
