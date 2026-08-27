@@ -16,10 +16,11 @@
     section { background:#fff; border:1px solid var(--line); border-radius:14px; padding:15px; box-shadow:0 2px 8px #12304a0d; }
     h2 { margin:0 0 12px; font-size:20px; }
     .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .grid > * { min-width:0; }
     .wide { grid-column:1/-1; }
     label, legend { display:block; font-weight:700; margin-bottom:5px; }
     input[type="text"], input[type="date"], input[type="number"], select, textarea {
-      width:100%; min-height:46px; padding:10px 12px; border:2px solid var(--line); border-radius:10px;
+      display:block; width:100%; max-width:100%; min-width:0; min-height:46px; padding:10px 12px; border:2px solid var(--line); border-radius:10px;
       background:#fff; color:var(--navy); font:inherit;
     }
     input:focus, select:focus, textarea:focus { outline:3px solid #0e7aae25; border-color:var(--blue); }
