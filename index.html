@@ -65,6 +65,9 @@
     #norilskDhlSection { background:#fff9dc; border-color:#d40511; }
     #norilskDhlSection > h2 { background:#ffcc00; color:#a60710; }
     #norilskDhlSection > h2::before { content:'5'; }
+    #norilskOzonSection { background:#fff0f7; border-color:#ee1683; }
+    #norilskOzonSection > h2 { background:#f34a9d; color:#4d0027; }
+    #norilskOzonSection > h2::before { content:'6'; }
     #ymSection .subblock { border-top-color:#dfbd55; }
     .section-title { display:flex; align-items:center; gap:10px; }
     .section-logo { width:42px; height:42px; flex:0 0 42px; object-fit:contain; border-radius:9px; }
@@ -152,6 +155,19 @@
       <div class="conditional-count" data-for="norilskDhlShipped" hidden><label for="norilskDhlShippedCount">Количество отгружено, шт.</label><input id="norilskDhlShippedCount" type="number" min="0" step="1" inputmode="numeric"></div>
     </div></section>
 
+    <section class="report-section" id="norilskOzonSection" hidden><h2 class="section-title"><img class="section-logo" src="assets/ozon-logo.png" alt="ОЗОН">ОЗОН</h2><div class="grid">
+      <fieldset class="wide"><legend>Была поставка ОЗОН?</legend><div class="choices">
+        <label class="choice"><input type="radio" name="norilskOzonSupply" value="да" required><span>Да</span></label>
+        <label class="choice"><input type="radio" name="norilskOzonSupply" value="нет"><span>Нет</span></label>
+      </div></fieldset>
+      <div><label for="norilskOzonIssued">Выдано</label><input id="norilskOzonIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="norilskOzonRemain">Остаток</label><input id="norilskOzonRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div class="wide subblock"><h3>📝 Возвраты</h3><fieldset><legend>Возвраты отгружены?</legend><div class="choices">
+        <label class="choice"><input type="radio" name="norilskOzonReturns" value="да" required><span>Да</span></label>
+        <label class="choice"><input type="radio" name="norilskOzonReturns" value="нет"><span>Нет</span></label>
+      </div></fieldset></div>
+    </div></section>
+
     <section class="report-section mesch-section" id="meschYmSection" hidden><h2 class="section-title"><img class="section-logo mesch-ym-logo" alt="">Яндекс Маркет</h2><div class="grid">
       <fieldset class="wide"><legend>Была поставка ЯМ?</legend><div class="choices">
         <label class="choice"><input type="radio" name="meschYmSupply" value="да" required><span>Да</span></label>
@@ -217,8 +233,8 @@
   const cashRu = raw => Number(raw).toLocaleString('ru-RU',{minimumFractionDigits:0,maximumFractionDigits:2});
   const standardSectionIds = ['ymSection','avitoSection','spSection','cashSection'];
   const meschSectionIds = ['meschYmSection','meschSpSection','dhlSection','meschCashSection'];
-  const norilskSectionIds = [...standardSectionIds, 'norilskDhlSection'];
-  const sectionIds = [...standardSectionIds, 'norilskDhlSection', ...meschSectionIds];
+  const norilskSectionIds = [...standardSectionIds, 'norilskDhlSection', 'norilskOzonSection'];
+  const sectionIds = [...standardSectionIds, 'norilskDhlSection', 'norilskOzonSection', ...meschSectionIds];
   const isMeschersky = () => address.value === 'Мещерский бульвар 3 к 2';
   function updateConditionalCount(name) {
     const wrapper = document.querySelector(`.conditional-count[data-for="${name}"]`);
@@ -278,6 +294,13 @@ ${line('Отгружено', 'dhlShipped', 'dhlShippedCount')}
     const norilskDhlLine = address.value === 'Норильская 16' ? `\n\n📦 DHL
 ${line('Принято', 'norilskDhlAccepted', 'norilskDhlAcceptedCount')}
 ${line('Отгружено', 'norilskDhlShipped', 'norilskDhlShippedCount')}` : '';
+    const norilskOzonLine = address.value === 'Норильская 16' ? `\n\n🩷 ОЗОН
+Была поставка ОЗОН - ${radio('norilskOzonSupply')}
+Выдано - ${val('norilskOzonIssued')}
+Остаток - ${val('norilskOzonRemain')}
+
+📝Возвраты
+Отгружены - ${radio('norilskOzonReturns')}` : '';
     return `${dateRu(val('date'))} 📋 ${val('address')}
 
 🗃️Была поставка ЯМ - ${radio('ymSupply')}
@@ -298,7 +321,7 @@ ${line('Отгружено', 'norilskDhlShipped', 'norilskDhlShippedCount')}` : 
 🟢 Авито
 Принято от курьера - ${val('avitoCourierIn')}
 Отгружено курьеру - ${radio('avitoOut')}
-Принято от продавцов - ${val('avitoSellers')}${cashLine}${norilskDhlLine}`;
+Принято от продавцов - ${val('avitoSellers')}${cashLine}${norilskDhlLine}${norilskOzonLine}`;
   }
   form.addEventListener('submit', event => {
     event.preventDefault(); status.textContent=''; status.classList.remove('error');
