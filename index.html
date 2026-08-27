@@ -374,8 +374,8 @@ ${line('Отгружен заказ курьеру', 'norilskDhlShipped', 'noril
   document.getElementById('vkBtn').addEventListener('click', () => {
     if (!result.value) { status.textContent='Сначала сформируйте отчёт.'; status.classList.add('error'); return; }
     result.select(); document.execCommand('copy');
-    window.open('https://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=', '_blank', 'noopener');
-    status.classList.remove('error'); status.textContent='Отчёт скопирован. Вставьте его в беседу VK и нажмите «Отправить».';
+    status.classList.remove('error'); status.textContent='Отчёт скопирован. Открываем беседу VK…';
+    window.location.assign('https://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=');
   });
   form.addEventListener('reset', () => {
     setTimeout(() => { document.getElementById('date').valueAsDate=new Date(); setVisibleSections(); },0);
