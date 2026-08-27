@@ -31,6 +31,16 @@
     .choice span { display:block; text-align:center; padding:10px; border:2px solid var(--line); border-radius:10px; font-weight:700; cursor:pointer; }
     .choice input:checked + span { border-color:var(--blue); background:#eaf6fb; color:#075b84; }
     .hint { margin:5px 0 0; color:#647783; font-size:13px; }
+    .subblock { margin-top:14px; padding-top:14px; border-top:1px solid var(--line); }
+    .subblock h3 { margin:0 0 10px; font-size:17px; }
+    .report-section[hidden] { display:none; }
+    #ymSection { background:#fff7d6; border-color:#efc64c; }
+    #ymSection h2, #ymSection h3 { color:#755500; }
+    #spSection { background:#e8f7ff; border-color:#6cc4ec; }
+    #spSection h2 { color:#075f87; }
+    #avitoSection { background:#eaf8ee; border-color:#72c889; }
+    #avitoSection h2 { color:#176b31; }
+    #ymSection .subblock { border-top-color:#dfbd55; }
     .actions { position:sticky; bottom:0; display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:10px 0; background:linear-gradient(transparent,var(--bg) 25%); }
     button { min-height:48px; border:0; border-radius:11px; padding:10px; font:700 15px Arial,sans-serif; cursor:pointer; }
     .primary { background:var(--blue); color:#fff; }
@@ -62,34 +72,27 @@
       </select></div>
     </div></section>
 
-    <section><h2>🗃️ Яндекс Маркет</h2><div class="grid">
+    <section class="report-section" id="ymSection" hidden><h2>🗃️ Яндекс Маркет</h2><div class="grid">
       <fieldset class="wide"><legend>Была поставка ЯМ?</legend><div class="choices">
         <label class="choice"><input type="radio" name="ymSupply" value="да" required><span>Да</span></label>
         <label class="choice"><input type="radio" name="ymSupply" value="нет"><span>Нет</span></label>
       </div></fieldset>
       <div><label for="ymIssued">Выдано</label><input id="ymIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
       <div><label for="ymRemain">Остаток</label><input id="ymRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div class="wide subblock"><h3>📝 Возвраты</h3><fieldset><legend>Возвраты отгружены?</legend><div class="choices">
+        <label class="choice"><input type="radio" name="returns" value="да" required><span>Да</span></label>
+        <label class="choice"><input type="radio" name="returns" value="нет"><span>Нет</span></label>
+      </div></fieldset></div>
+      <div class="wide subblock"><h3>📦 Дропы</h3><div class="grid">
+        <fieldset class="wide"><legend>Дропы отгружены?</legend><div class="choices">
+          <label class="choice"><input type="radio" name="drops" value="да" required><span>Да</span></label>
+          <label class="choice"><input type="radio" name="drops" value="нет"><span>Нет</span></label>
+        </div></fieldset>
+        <div class="wide"><label for="dropsRemain">Остаток</label><input id="dropsRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+      </div></div>
     </div></section>
 
-    <section><h2>📝 Возвраты</h2><fieldset><legend>Возвраты отгружены?</legend><div class="choices">
-      <label class="choice"><input type="radio" name="returns" value="да" required><span>Да</span></label>
-      <label class="choice"><input type="radio" name="returns" value="нет"><span>Нет</span></label>
-    </div></fieldset></section>
-
-    <section><h2>📦 Дропы</h2><div class="grid">
-      <fieldset class="wide"><legend>Дропы отгружены?</legend><div class="choices">
-        <label class="choice"><input type="radio" name="drops" value="да" required><span>Да</span></label>
-        <label class="choice"><input type="radio" name="drops" value="нет"><span>Нет</span></label>
-      </div></fieldset>
-      <div class="wide"><label for="dropsRemain">Остаток</label><input id="dropsRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
-    </div></section>
-
-    <section><h2>🛒 СП</h2><div class="grid">
-      <div><label for="spAccepted">Принято</label><input id="spAccepted" type="number" min="0" step="1" inputmode="numeric" required></div>
-      <div><label for="spIssued">Выдано</label><input id="spIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
-    </div></section>
-
-    <section><h2>🟢 Avito</h2><div class="grid">
+    <section class="report-section" id="avitoSection" hidden><h2>🟢 Avito</h2><div class="grid">
       <div><label for="avitoCourierIn">Принято от курьера</label><input id="avitoCourierIn" type="number" min="0" step="1" inputmode="numeric" required></div>
       <div><label for="avitoSellers">Принято от продавцов</label><input id="avitoSellers" type="number" min="0" step="1" inputmode="numeric" required></div>
       <fieldset class="wide"><legend>Отгружено курьеру?</legend><div class="choices">
@@ -98,7 +101,12 @@
       </div></fieldset>
     </div></section>
 
-    <section><h2>💰 Наличные в ПВЗ</h2>
+    <section class="report-section" id="spSection" hidden><h2>🛒 СП</h2><div class="grid">
+      <div><label for="spAccepted">Принято</label><input id="spAccepted" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="spIssued">Выдано</label><input id="spIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+    </div></section>
+
+    <section class="report-section" id="cashSection" hidden><h2>💰 Наличные в ПВЗ</h2>
       <label for="cash">Фактическая сумма, ₽</label><input id="cash" type="number" min="0" step="0.01" inputmode="decimal" required>
     </section>
 
@@ -116,12 +124,28 @@
   const resultBox = document.getElementById('resultBox');
   const result = document.getElementById('result');
   const status = document.getElementById('status');
+  const address = document.getElementById('address');
   document.getElementById('date').valueAsDate = new Date();
   const val = id => document.getElementById(id).value.trim();
   const radio = name => form.elements[name].value;
   const dateRu = raw => { const [y,m,d] = raw.split('-'); return `${d}.${m}.${y.slice(-2)}`; };
   const cashRu = raw => Number(raw).toLocaleString('ru-RU',{minimumFractionDigits:0,maximumFractionDigits:2});
+  const sectionIds = ['ymSection','avitoSection','spSection','cashSection'];
+  function setVisibleSections() {
+    const selected = address.value;
+    const visible = selected ? sectionIds : [];
+    sectionIds.forEach(id => {
+      const section = document.getElementById(id);
+      const show = visible.includes(id);
+      section.hidden = !show;
+      section.querySelectorAll('input,select,textarea').forEach(control => control.disabled = !show);
+    });
+    result.value=''; resultBox.style.display='none'; status.textContent='';
+  }
+  address.addEventListener('change', setVisibleSections);
+  setVisibleSections();
   function buildReport() {
+    const cashLine = `\n\n💰Наличные в ПВЗ - ${cashRu(val('cash'))} ₽`;
     return `${dateRu(val('date'))} 📋 ${val('address')}
 
 🗃️Была поставка ЯМ - ${radio('ymSupply')}
@@ -142,9 +166,7 @@
 🟢 Авито
 Принято от курьера - ${val('avitoCourierIn')}
 Отгружено курьеру - ${radio('avitoOut')}
-Принято от продавцов - ${val('avitoSellers')}
-
-💰Наличные в ПВЗ - ${cashRu(val('cash'))} ₽`;
+Принято от продавцов - ${val('avitoSellers')}${cashLine}`;
   }
   form.addEventListener('submit', event => {
     event.preventDefault(); status.textContent=''; status.classList.remove('error');
@@ -164,7 +186,7 @@
     status.classList.remove('error'); status.textContent='Отчёт скопирован. Вставьте его в беседу VK и нажмите «Отправить».';
   });
   form.addEventListener('reset', () => {
-    setTimeout(() => { document.getElementById('date').valueAsDate=new Date(); result.value=''; resultBox.style.display='none'; status.textContent=''; },0);
+    setTimeout(() => { document.getElementById('date').valueAsDate=new Date(); setVisibleSections(); },0);
   });
 </script>
 </body>
