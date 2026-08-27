@@ -171,7 +171,7 @@
       </div></fieldset>
       <div><label for="norilskOzonIssued">Выдано заказов клиенту</label><input id="norilskOzonIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
       <div><label for="norilskOzonRemain">Остаток заказов на складе</label><input id="norilskOzonRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
-      <div class="wide subblock"><h3>📝 Возвраты</h3><fieldset><legend>Возвраты отгружены?</legend><div class="choices">
+      <div class="wide subblock"><h3>📝 Возвраты</h3><fieldset><legend>Возвраты отгружены курьеру?</legend><div class="choices">
         <label class="choice"><input type="radio" name="norilskOzonReturns" value="да" required><span>Да</span></label>
         <label class="choice"><input type="radio" name="norilskOzonReturns" value="нет"><span>Нет</span></label>
       </div></fieldset></div>
@@ -325,7 +325,7 @@ ${line('Отгружен заказ курьеру', 'dhlShipped', 'dhlShippedCo
 Остаток заказов на складе - ${val('norilskOzonRemain')}
 
 📝Возвраты
-Отгружены - ${radio('norilskOzonReturns')}
+Возвраты отгружены курьеру - ${radio('norilskOzonReturns')}
 
 🛒СП
 Принято заказов от курьера - ${val('spAccepted')}
