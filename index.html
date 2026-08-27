@@ -79,7 +79,6 @@
     .primary { background:var(--blue); color:#fff; }
     .copy { background:var(--navy); color:#fff; }
     .vk { background:#2787f5; color:#fff; }
-    .vk-fallback { grid-column:1/-1; background:#dcecff; color:#075b84; }
     .reset { background:#e5ebee; color:var(--navy); }
     #resultBox { display:none; border:2px solid var(--blue); }
     #result { min-height:390px; resize:vertical; font-family:Arial,sans-serif; }
@@ -225,8 +224,7 @@
     <div class="actions">
       <button class="primary" type="submit">Сформировать отчёт</button>
       <button class="copy" type="button" id="copyBtn">Скопировать</button>
-      <a class="vk action-link" id="vkBtn" href="vk://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=">Скопировать и открыть беседу в приложении VK</a>
-      <a class="vk-fallback action-link" href="https://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=" target="_blank" rel="noopener">Если VK не открылся — открыть обычную ссылку</a>
+      <button class="vk" type="button" id="vkBtn">Скопировать и открыть беседу VK</button>
       <button class="reset" type="reset">Очистить</button>
     </div>
   </form>
@@ -378,6 +376,13 @@ ${line('Отгружен заказ курьеру', 'norilskDhlShipped', 'noril
     if (!result.value) { event.preventDefault(); status.textContent='Сначала сформируйте отчёт.'; status.classList.add('error'); return; }
     result.select(); document.execCommand('copy');
     status.classList.remove('error'); status.textContent='Отчёт скопирован. Открываем беседу VK…';
+    const fallback = setTimeout(() => {
+      if (!document.hidden) window.location.assign('https://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=');
+    }, 1200);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) clearTimeout(fallback);
+    }, {once:true});
+    window.location.assign('vk://vk.me/join/JkpmFFtVdykuX3XIkl52Kmq7DXljZHn8Cos=');
   });
   form.addEventListener('reset', () => {
     setTimeout(() => { document.getElementById('date').valueAsDate=new Date(); setVisibleSections(); },0);
