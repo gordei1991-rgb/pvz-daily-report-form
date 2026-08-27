@@ -18,9 +18,9 @@
     .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .grid > * { min-width:0; }
     .wide { grid-column:1/-1; }
-    label, legend { display:block; font-weight:700; margin-bottom:5px; }
+    label, legend { display:block; font-weight:700; font-size:17px; margin-bottom:7px; }
     input[type="text"], input[type="date"], input[type="number"], select, textarea {
-      display:block; width:100%; max-width:100%; min-width:0; min-height:46px; padding:10px 12px; border:2px solid var(--line); border-radius:10px;
+      display:block; width:100%; max-width:100%; min-width:0; min-height:52px; padding:11px 13px; border:2px solid var(--line); border-radius:10px;
       background:#fff; color:var(--navy); font:inherit;
     }
     input:focus, select:focus, textarea:focus { outline:3px solid #0e7aae25; border-color:var(--blue); }
@@ -28,18 +28,28 @@
     .choices { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
     .choice { position:relative; }
     .choice input { position:absolute; opacity:0; }
-    .choice span { display:block; text-align:center; padding:10px; border:2px solid var(--line); border-radius:10px; font-weight:700; cursor:pointer; }
+    .choice span { display:block; text-align:center; min-height:52px; padding:13px 10px; border:2px solid var(--line); border-radius:10px; font-weight:700; cursor:pointer; }
     .choice input:checked + span { border-color:var(--blue); background:#eaf6fb; color:#075b84; }
     .hint { margin:5px 0 0; color:#647783; font-size:13px; }
     .subblock { margin-top:14px; padding-top:14px; border-top:1px solid var(--line); }
     .subblock h3 { margin:0 0 10px; font-size:17px; }
     .report-section[hidden] { display:none; }
-    #ymSection { background:#fff7d6; border-color:#efc64c; }
-    #ymSection h2, #ymSection h3 { color:#755500; }
-    #spSection { background:#e8f7ff; border-color:#6cc4ec; }
-    #spSection h2 { color:#075f87; }
-    #avitoSection { background:#eaf8ee; border-color:#72c889; }
-    #avitoSection h2 { color:#176b31; }
+    .report-section { overflow:hidden; border-width:2px; }
+    .report-section > h2 { margin:-15px -15px 16px; padding:12px 15px; font-size:22px; }
+    .report-section > h2::before { display:grid; place-items:center; width:30px; height:30px; flex:0 0 30px; border-radius:50%; background:#fff; color:var(--navy); font-size:17px; font-weight:800; }
+    #ymSection { background:#fff9df; border-color:#f0bb00; }
+    #ymSection > h2 { background:#ffd43b; color:#3e3300; }
+    #ymSection > h2::before { content:'1'; }
+    #ymSection h3 { color:#624d00; }
+    #spSection { background:#e9f8ff; border-color:#169fd3; }
+    #spSection > h2 { display:flex; align-items:center; gap:10px; background:#45c4f2; color:#073c54; }
+    #spSection > h2::before { content:'3'; }
+    #avitoSection { background:#ecfff2; border-color:#18a94c; }
+    #avitoSection > h2 { background:#39d36f; color:#063d19; }
+    #avitoSection > h2::before { content:'2'; }
+    #cashSection { border-color:#9badb8; }
+    #cashSection > h2 { display:flex; align-items:center; gap:10px; background:#dfe7eb; }
+    #cashSection > h2::before { content:'4'; }
     #ymSection .subblock { border-top-color:#dfbd55; }
     .section-title { display:flex; align-items:center; gap:10px; }
     .section-logo { width:42px; height:42px; flex:0 0 42px; object-fit:contain; border-radius:9px; }
@@ -56,13 +66,13 @@
     @media (max-width:560px) {
       .grid { grid-template-columns:1fr; }
       .wide { grid-column:auto; }
-      .actions { grid-template-columns:1fr; }
+      .actions { position:static; grid-template-columns:1fr; padding-top:4px; background:none; }
     }
   </style>
 </head>
 <body>
 <main>
-  <header><h1>Ежедневный отчёт ПВЗ</h1><p>Заполните данные за текущую смену</p></header>
+  <header><h1>Ежедневный отчёт ПВЗ</h1><p>Выберите адрес и заполняйте разделы сверху вниз</p></header>
   <form id="reportForm">
     <section><div class="grid">
       <div><label for="date">Дата отчёта</label><input id="date" type="date" required></div>
