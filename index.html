@@ -118,8 +118,8 @@
         <label class="choice"><input type="radio" name="ymSupply" value="да" required><span>Да</span></label>
         <label class="choice"><input type="radio" name="ymSupply" value="нет"><span>Нет</span></label>
       </div></fieldset>
-      <div><label for="ymIssued">Выдано</label><input id="ymIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
-      <div><label for="ymRemain">Остаток</label><input id="ymRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="ymIssued">Выдано заказов клиенту</label><input id="ymIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="ymRemain">Остаток заказов на складе</label><input id="ymRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
       <div class="wide subblock"><h3>📝 Возвраты</h3><fieldset><legend>Возвраты отгружены?</legend><div class="choices">
         <label class="choice"><input type="radio" name="returns" value="да" required><span>Да</span></label>
         <label class="choice"><input type="radio" name="returns" value="нет"><span>Нет</span></label>
@@ -129,7 +129,7 @@
           <label class="choice"><input type="radio" name="drops" value="да" required><span>Да</span></label>
           <label class="choice"><input type="radio" name="drops" value="нет"><span>Нет</span></label>
         </div></fieldset>
-        <div class="wide"><label for="dropsRemain">Остаток</label><input id="dropsRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+        <div class="wide"><label for="dropsRemain">Остаток заказов на складе</label><input id="dropsRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
       </div></div>
     </div></section>
 
@@ -144,7 +144,7 @@
 
     <section class="report-section" id="spSection" hidden><h2>🛒 СП</h2><div class="grid">
       <div><label for="spAccepted">Принято</label><input id="spAccepted" type="number" min="0" step="1" inputmode="numeric" required></div>
-      <div><label for="spIssued">Выдано</label><input id="spIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="spIssued">Выдано заказов клиенту</label><input id="spIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
     </div></section>
 
     <section class="report-section" id="cashSection" hidden><h2>💰 Наличные в ПВЗ</h2>
@@ -169,8 +169,8 @@
         <label class="choice"><input type="radio" name="norilskOzonSupply" value="да" required><span>Да</span></label>
         <label class="choice"><input type="radio" name="norilskOzonSupply" value="нет"><span>Нет</span></label>
       </div></fieldset>
-      <div><label for="norilskOzonIssued">Выдано</label><input id="norilskOzonIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
-      <div><label for="norilskOzonRemain">Остаток</label><input id="norilskOzonRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="norilskOzonIssued">Выдано заказов клиенту</label><input id="norilskOzonIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="norilskOzonRemain">Остаток заказов на складе</label><input id="norilskOzonRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
       <div class="wide subblock"><h3>📝 Возвраты</h3><fieldset><legend>Возвраты отгружены?</legend><div class="choices">
         <label class="choice"><input type="radio" name="norilskOzonReturns" value="да" required><span>Да</span></label>
         <label class="choice"><input type="radio" name="norilskOzonReturns" value="нет"><span>Нет</span></label>
@@ -182,8 +182,8 @@
         <label class="choice"><input type="radio" name="meschYmSupply" value="да" required><span>Да</span></label>
         <label class="choice"><input type="radio" name="meschYmSupply" value="нет"><span>Нет</span></label>
       </div></fieldset>
-      <div><label for="meschYmIssued">Выдано</label><input id="meschYmIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
-      <div><label for="meschYmRemain">Остаток</label><input id="meschYmRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="meschYmIssued">Выдано заказов клиенту</label><input id="meschYmIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="meschYmRemain">Остаток заказов на складе</label><input id="meschYmRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
       <div class="wide subblock"><h3>📝 Возвраты</h3><fieldset><legend>Возвраты отгружены?</legend><div class="choices">
         <label class="choice"><input type="radio" name="meschReturns" value="да" required><span>Да</span></label>
         <label class="choice"><input type="radio" name="meschReturns" value="нет"><span>Нет</span></label>
@@ -193,13 +193,13 @@
           <label class="choice"><input type="radio" name="meschDrops" value="да" required><span>Да</span></label>
           <label class="choice"><input type="radio" name="meschDrops" value="нет"><span>Нет</span></label>
         </div></fieldset>
-        <div class="wide"><label for="meschDropsRemain">Остаток</label><input id="meschDropsRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
+        <div class="wide"><label for="meschDropsRemain">Остаток заказов на складе</label><input id="meschDropsRemain" type="number" min="0" step="1" inputmode="numeric" required></div>
       </div></div>
     </div></section>
 
     <section class="report-section mesch-section" id="meschSpSection" hidden><h2>🛒 СП</h2><div class="grid">
       <div><label for="meschSpLegacyAccepted">Принято</label><input id="meschSpLegacyAccepted" type="number" min="0" step="1" inputmode="numeric" required></div>
-      <div><label for="meschSpIssued">Выдано</label><input id="meschSpIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
+      <div><label for="meschSpIssued">Выдано заказов клиенту</label><input id="meschSpIssued" type="number" min="0" step="1" inputmode="numeric" required></div>
     </div></section>
 
     <section class="report-section mesch-section" id="dhlSection" hidden><h2 class="section-title"><img class="section-logo" src="assets/dhl-logo.png" alt="DHL">DHL</h2><div class="grid">
@@ -280,19 +280,19 @@
 
 🟡 Яндекс Маркет
 Была поставка ЯМ — ${radio('meschYmSupply')}
-Выдано — ${val('meschYmIssued')}
-Остаток — ${val('meschYmRemain')}
+Выдано заказов клиенту — ${val('meschYmIssued')}
+Остаток заказов на складе — ${val('meschYmRemain')}
 
 📝 Возвраты
 Отгружены — ${radio('meschReturns')}
 
 📦 Дропы
 Отгружено — ${radio('meschDrops')}
-Остаток — ${val('meschDropsRemain')}
+Остаток заказов на складе — ${val('meschDropsRemain')}
 
 🛒 СП
 Принято — ${val('meschSpLegacyAccepted')}
-Выдано — ${val('meschSpIssued')}
+Выдано заказов клиенту — ${val('meschSpIssued')}
 
 📦 DHL
 ${line('Принято', 'dhlAccepted', 'dhlAcceptedCount')}
@@ -304,15 +304,15 @@ ${line('Отгружено', 'dhlShipped', 'dhlShippedCount')}
       return `${dateRu(val('date'))} 📋 ${val('address')}
 
 🗃️Была поставка ЯМ - ${radio('ymSupply')}
-Выдано - ${val('ymIssued')}
-Остаток - ${val('ymRemain')}
+Выдано заказов клиенту - ${val('ymIssued')}
+Остаток заказов на складе - ${val('ymRemain')}
 
 📝Возвраты
 Отгружены - ${radio('returns')}
 
 📦Дропы
 Отгружено - ${radio('drops')}
-Остаток - ${val('dropsRemain')}
+Остаток заказов на складе - ${val('dropsRemain')}
 
 🟢 Авито
 Принято от курьера - ${val('avitoCourierIn')}
@@ -321,15 +321,15 @@ ${line('Отгружено', 'dhlShipped', 'dhlShippedCount')}
 
 🩷 ОЗОН
 Была поставка ОЗОН - ${radio('norilskOzonSupply')}
-Выдано - ${val('norilskOzonIssued')}
-Остаток - ${val('norilskOzonRemain')}
+Выдано заказов клиенту - ${val('norilskOzonIssued')}
+Остаток заказов на складе - ${val('norilskOzonRemain')}
 
 📝Возвраты
 Отгружены - ${radio('norilskOzonReturns')}
 
 🛒СП
 Принято - ${val('spAccepted')}
-Выдано - ${val('spIssued')}
+Выдано заказов клиенту - ${val('spIssued')}
 
 📦 DHL
 ${line('Принято', 'norilskDhlAccepted', 'norilskDhlAcceptedCount')}
@@ -341,19 +341,19 @@ ${line('Отгружено', 'norilskDhlShipped', 'norilskDhlShippedCount')}
     return `${dateRu(val('date'))} 📋 ${val('address')}
 
 🗃️Была поставка ЯМ - ${radio('ymSupply')}
-Выдано - ${val('ymIssued')}
-Остаток - ${val('ymRemain')}
+Выдано заказов клиенту - ${val('ymIssued')}
+Остаток заказов на складе - ${val('ymRemain')}
 
 📝Возвраты
 Отгружены - ${radio('returns')}
 
 📦Дропы
 Отгружено - ${radio('drops')}
-Остаток - ${val('dropsRemain')}
+Остаток заказов на складе - ${val('dropsRemain')}
 
 🛒СП
 Принято - ${val('spAccepted')}
-Выдано - ${val('spIssued')}
+Выдано заказов клиенту - ${val('spIssued')}
 
 🟢 Авито
 Принято от курьера - ${val('avitoCourierIn')}
